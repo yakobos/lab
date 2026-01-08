@@ -31,6 +31,20 @@ kubectl port-forward pod/linkding-ASSADFASDSAFASD -n linkding 8080:9090
 # setup first linkding user
 kubectl exec -it <linkding_pod_name> -- python manage.py createsuperuser --username=<USERNAME> --email=<EMAIL>
 
+# exposing linkding to the internet
+# create a cloudflare tunnel on cloudflare gui, just pay for a domain
+# install cloudflared
+cloudflared tunnel login
+cloudflared tunnel create <tunnel_name>
+kubectl create secret generic tunnel-credentials \
+	--from-file=credentials.json=/homedir/.cloudflared/<tunnel_id>.json \
+	--from-file=cert.pem=/homedir/.cloudflared/cert.pem
+# go to cloudflare DNS, add new CNAME record, and enter <tunnel_id>.cfargotunnel.com
+# create service manifest
+# create deployment manifest
+#       my deployment differed from mischas in that i needed the extra cert.pem
+# create configmap manifest
+
 # tree
 # kubectx
 # 
