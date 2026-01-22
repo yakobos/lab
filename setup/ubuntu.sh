@@ -45,6 +45,11 @@ kubectl create secret generic tunnel-credentials \
 #       my deployment differed from mischas in that i needed the extra cert.pem
 # create configmap manifest
 
+
+# install age
+# install sops
+age-keygen -o age.agekey
+
 # tree
 # kubectx
 # 
